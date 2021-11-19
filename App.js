@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import 'localstorage-polyfill';
-import { Button, FlatList, Image, Platform, StyleSheet, Text,  TouchableOpacity, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text,  TouchableOpacity, View, TextInput } from 'react-native';
 import AddTodo from './AddTodo';
 import AddTodo2 from './AddTodo2';
 import Header from './Header';
@@ -58,10 +58,29 @@ export default function App() {
     setTodos2(removeItem);
   }
 
+  // function Supprimer(key){
+  //   if(appui = true){
+  //     const removeItem = todos.filter((todo) => {
+  //       return todo.key !== key;
+  //     });
+  //     setTodos(removeItem);
+  //   }
+  // }
+
   
-  
+  const [text, setText] = useState('');
+  const changeHandler = (val) => {
+    setText(val);
+  }
+
+  const [selection, setSelect] = useState('');
 
 
+  const Supprimer = (setSelect) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todo => todo.key != setSelect);
+    })
+  }
 
   return(
 
@@ -79,14 +98,31 @@ export default function App() {
               <FlatList 
                 data={todos} 
                 renderItem={({item})=>(
-                  <TodoItem item={item} pressHandler={pressHandler} Supprimerhandler={Supprimerhandler}></TodoItem>
+                  <TodoItem item={item} setSelect={setSelect} pressHandler={pressHandler} Supprimerhandler={Supprimerhandler}></TodoItem>
                 )}
                 >
               </FlatList>
             </View>
           </View>   
           {/*Zone de saisie*/}
-          <AddTodo envoyerHandler={envoyerHandler}></AddTodo>
+          {/* <AddTodo envoyerHandler={envoyerHandler}></AddTodo> */}
+          <View>
+            <TextInput style={styles.input}
+              placeholder='Entrer un mot'
+              onChangeText={changeHandler}>
+            </TextInput>
+            <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+              <TouchableOpacity style={styles.button2} onPress={() => envoyerHandler(text)}>
+                <Text style={styles.text}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button2} onPress={() => envoyerHandler(text)}>
+                <Text style={styles.text}>M</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button2} onPress={() => Supprimer()}>
+                <Text style={styles.text}>-</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       
      
@@ -163,7 +199,25 @@ const styles = StyleSheet.create({
     borderColor:'black',
     padding: 10,
     borderWidth:2,
-  }
+  },
+  input: {
+    width: 150,
+    marginTop: 20,
+    marginBottom: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: 'black'
+  },
+    button2: {
+      backgroundColor: 'coral',
+      marginHorizontal: 5
+    },
+    text: {
+      fontSize: 15,
+      padding: 15,
+      color: 'white'
+    },
  });
  
 

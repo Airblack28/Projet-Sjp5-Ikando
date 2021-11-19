@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Button } from 'react-native';
 
-export default function TodoItem2({item, pressHandler, Supprimerhandler, handleEditClick, todo}) {
+export default function TodoItem2({item, pressHandler, Supprimerhandler2, handleEditClick, todo}) {
 
 
 
@@ -13,8 +13,8 @@ export default function TodoItem2({item, pressHandler, Supprimerhandler, handleE
         >
           <Text style={styles.text}>{item.text}</Text>
         </TouchableOpacity>
-        <Button onPress={() => handleEditClick(todo)} title='M' color='blue'></Button>
-        <Button onPress={() => Supprimerhandler(item.key)} title='-' color='blue'></Button> 
+        <Button onPress={() => handleEditClick(todo)} title='M' color='coral'></Button>
+        <Button onPress={() => Supprimerhandler2(item.key)} title='-' color='coral'></Button> 
     </View>
       
 

@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity} from 'react-native';
 
-export default function AddTodo({envoyerHandler}) {
+export default function AddTodo({envoyerHandler, Supprimer}) {
 
   const [text, setText] = useState('');
-
   const changeHandler = (val) => {
     setText(val);
   }
@@ -20,10 +19,10 @@ export default function AddTodo({envoyerHandler}) {
         <TouchableOpacity style={styles.button} onPress={() => envoyerHandler(text)}>
           <Text style={styles.text}>+</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => submitHandler(text)}>
+        <TouchableOpacity style={styles.button} onPress={() => envoyerHandler(text)}>
           <Text style={styles.text}>M</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => submitHandler(text)}>
+        <TouchableOpacity style={styles.button} onPress={() => Supprimer()}>
           <Text style={styles.text}>-</Text>
         </TouchableOpacity>
       </View>
