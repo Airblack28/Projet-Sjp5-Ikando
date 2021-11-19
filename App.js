@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 // import 'localstorage-polyfill';
 import { Button, FlatList, Image, Platform, StyleSheet, Text,  TouchableOpacity, View } from 'react-native';
 import AddTodo from './AddTodo';
+import AddTodo2 from './AddTodo2';
 import Header from './Header';
 import TodoItem from './TodoItem';
+import TodoItem2 from './TodoItem2';
 
 
 export default function App() {
@@ -11,10 +13,6 @@ export default function App() {
   const [todos, setTodos] = useState([
     { text: 'Texte1', key:'1'},
   ]);
-  const [todos2, setTodos2] = useState([
-    { text: 'Texte1', key:'1'},
-  ]);
-
   const pressHandler = (key) => {
     setTodos((prevTodos) => {
       return prevTodos.filter(todo => todo.key != key);
@@ -37,15 +35,18 @@ export default function App() {
 
 
 
+  const [todos2, setTodos2] = useState([
+    { text: 'Texte1', key:'1'},
+  ]);
   const pressHandler2 = (key) => {
     setTodos2((prevTodos2) => {
       return prevTodos2.filter(todo2 => todo2.key != key);
     })
   }
-  const envoyerHandler2 = (text) => {
+  const envoyerHandler2 = (text2) => {
     setTodos2((prevTodos2) => {
       return [
-        { text: text, key: Math.random().toString()},
+        { text: text2, key: Math.random().toString()},
         ...prevTodos2
       ]
     })
@@ -54,10 +55,10 @@ export default function App() {
     const removeItem = todos.filter((todo) => {
       return todo.key !== key;
     });
-    setTodos(removeItem);
+    setTodos2(removeItem);
   }
 
-
+  
   
 
 
@@ -106,16 +107,16 @@ export default function App() {
           {/*Affichage des elements*/}
             <View style={styles.list}>
               <FlatList 
-                data={todos} 
+                data={todos2} 
                 renderItem={({item})=>(
-                  <TodoItem item={item} pressHandler={pressHandler} Supprimerhandler={Supprimerhandler}></TodoItem>
+                  <TodoItem2 item={item} pressHandler2={pressHandler2} Supprimerhandler2={Supprimerhandler2}></TodoItem2>
                 )}
                 >
               </FlatList>
             </View>
           </View>   
           {/*Zone de saisie*/}
-          <AddTodo envoyerHandler={envoyerHandler}></AddTodo>
+          <AddTodo2 envoyerHandler2={envoyerHandler2}></AddTodo2>
         </View>
       
 
